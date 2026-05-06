@@ -3,191 +3,205 @@ import Icon from "@/components/ui/icon";
 
 type Tab = "login" | "register";
 
-const BG =
-  "https://cdn.poehali.dev/projects/53a49d86-e42f-4d96-a8cc-d91ea0d7c8ba/files/492e7dbc-e3cb-4feb-91cd-a35257fbd2da.jpg";
-
 export default function Index() {
   const [tab, setTab] = useState<Tab>("login");
   const [showPass, setShowPass] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
   return (
-    <div className="nx-root">
-      {/* Background */}
-      <div className="nx-bg" style={{ backgroundImage: `url('${BG}')` }} />
-      <div className="nx-overlay" />
-
+    <div className="st-root">
       {/* Header */}
-      <header className="nx-header">
-        <div className="nx-logo">
-          <Icon name="Gamepad2" size={26} />
-          <span>Steam</span>
+      <header className="st-header">
+        <div className="st-header-inner">
+          <div className="st-logo">
+            <svg width="176" height="44" viewBox="0 0 176 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="34" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="36" fill="white" letterSpacing="-1">STEAM</text>
+            </svg>
+          </div>
+          <nav className="st-nav">
+            <a href="#">МАГАЗИН</a>
+            <a href="#">СООБЩЕСТВО</a>
+            <a href="#">О STEAM</a>
+            <a href="#">ПОДДЕРЖКА</a>
+          </nav>
         </div>
-        <nav className="nx-nav">
-          <a href="#">Магазин</a>
-          <a href="#">Сообщество</a>
-          <a href="#">Поддержка</a>
-        </nav>
       </header>
 
+      {/* Sub-nav */}
+      <div className="st-subnav">
+        <div className="st-subnav-inner">
+          <a href="#" className="st-subnav-link active">ВОЙТИ</a>
+          <a href="#" className="st-subnav-link">СОЗДАТЬ АККАУНТ</a>
+        </div>
+      </div>
+
       {/* Main */}
-      <main className="nx-main">
-        <div className="nx-card">
+      <main className="st-main">
+        <div className="st-page">
           {/* Tabs */}
-          <div className="nx-tabs">
+          <div className="st-tabs">
             <button
-              className={`nx-tab${tab === "login" ? " active" : ""}`}
+              className={`st-tab${tab === "login" ? " active" : ""}`}
               onClick={() => setTab("login")}
             >
-              Войти
+              Войти в существующий аккаунт
             </button>
             <button
-              className={`nx-tab${tab === "register" ? " active" : ""}`}
+              className={`st-tab${tab === "register" ? " active" : ""}`}
               onClick={() => setTab("register")}
             >
-              Создать аккаунт
+              Создать новый аккаунт
             </button>
           </div>
 
-          {/* Login */}
-          {tab === "login" && (
-            <form className="nx-form" onSubmit={(e) => e.preventDefault()}>
-              <p className="nx-subtitle">Войдите, чтобы открыть библиотеку игр</p>
+          <div className="st-panel">
+            {/* Login */}
+            {tab === "login" && (
+              <div className="st-form-wrap">
+                <h2 className="st-title">Войти в Steam</h2>
 
-              <div className="nx-field">
-                <label>Имя аккаунта или Email</label>
-                <div className="nx-input-wrap">
-                  <Icon name="User" size={15} className="nx-ico" />
-                  <input type="text" placeholder="Введите имя или email" autoComplete="username" />
-                </div>
-              </div>
+                <form className="st-form" onSubmit={(e) => e.preventDefault()}>
+                  <div className="st-field">
+                    <label>Войти с именем аккаунта</label>
+                    <input type="text" placeholder="" autoComplete="username" />
+                  </div>
 
-              <div className="nx-field">
-                <label>Пароль</label>
-                <div className="nx-input-wrap">
-                  <Icon name="Lock" size={15} className="nx-ico" />
-                  <input
-                    type={showPass ? "text" : "password"}
-                    placeholder="Введите пароль"
-                    autoComplete="current-password"
-                  />
-                  <button type="button" className="nx-eye" onClick={() => setShowPass(!showPass)}>
-                    <Icon name={showPass ? "EyeOff" : "Eye"} size={15} />
+                  <div className="st-field">
+                    <label>Пароль</label>
+                    <div className="st-pass-wrap">
+                      <input
+                        type={showPass ? "text" : "password"}
+                        placeholder=""
+                        autoComplete="current-password"
+                      />
+                      <button type="button" className="st-eye" onClick={() => setShowPass(!showPass)}>
+                        <Icon name={showPass ? "EyeOff" : "Eye"} size={14} />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="st-check-row">
+                    <label className="st-check">
+                      <input type="checkbox" />
+                      <span>Запомнить меня</span>
+                    </label>
+                  </div>
+
+                  <button type="submit" className="st-btn-green">
+                    Войти
                   </button>
-                </div>
+
+                  <div className="st-links">
+                    <a href="#" className="st-link">Я не могу войти</a>
+                    <a href="#" className="st-link">Забыли пароль?</a>
+                    <a href="#" className="st-link">Войти с помощью QR-кода</a>
+                  </div>
+                </form>
               </div>
+            )}
 
-              <div className="nx-row">
-                <label className="nx-check">
-                  <input type="checkbox" />
-                  <span>Запомнить меня</span>
-                </label>
-                <a href="#" className="nx-forgot">Забыли пароль?</a>
-              </div>
+            {/* Register */}
+            {tab === "register" && (
+              <div className="st-form-wrap">
+                <h2 className="st-title">Создать аккаунт</h2>
 
-              <button type="submit" className="nx-btn-primary">
-                Войти в аккаунт
-              </button>
+                <form className="st-form" onSubmit={(e) => e.preventDefault()}>
+                  <div className="st-field">
+                    <label>Имя аккаунта</label>
+                    <input type="text" placeholder="" />
+                    <p className="st-hint">Имя аккаунта используется для входа в Steam. Оно не может быть изменено после создания.</p>
+                  </div>
 
-              <div className="nx-divider">
-                <span />
-                <p>или войти через</p>
-                <span />
-              </div>
+                  <div className="st-field">
+                    <label>Email-адрес</label>
+                    <input type="email" placeholder="" />
+                  </div>
 
-              <div className="nx-socials">
-                <button type="button" className="nx-social-btn">
-                  <Icon name="Chrome" size={17} />
-                  Google
-                </button>
-                <button type="button" className="nx-social-btn">
-                  <Icon name="Github" size={17} />
-                  GitHub
-                </button>
-              </div>
-            </form>
-          )}
+                  <div className="st-field">
+                    <label>Страна проживания</label>
+                    <select>
+                      <option>Россия</option>
+                      <option>Беларусь</option>
+                      <option>Казахстан</option>
+                      <option>Украина</option>
+                    </select>
+                  </div>
 
-          {/* Register */}
-          {tab === "register" && (
-            <form className="nx-form" onSubmit={(e) => e.preventDefault()}>
-              <p className="nx-subtitle">Создайте бесплатный аккаунт и начните играть</p>
+                  <div className="st-field">
+                    <label>Пароль</label>
+                    <div className="st-pass-wrap">
+                      <input
+                        type={showPass ? "text" : "password"}
+                        placeholder=""
+                      />
+                      <button type="button" className="st-eye" onClick={() => setShowPass(!showPass)}>
+                        <Icon name={showPass ? "EyeOff" : "Eye"} size={14} />
+                      </button>
+                    </div>
+                  </div>
 
-              <div className="nx-field">
-                <label>Имя аккаунта</label>
-                <div className="nx-input-wrap">
-                  <Icon name="User" size={15} className="nx-ico" />
-                  <input type="text" placeholder="Придумайте имя аккаунта" />
-                </div>
-              </div>
+                  <div className="st-field">
+                    <label>Подтвердите пароль</label>
+                    <div className="st-pass-wrap">
+                      <input
+                        type={showConfirm ? "text" : "password"}
+                        placeholder=""
+                      />
+                      <button type="button" className="st-eye" onClick={() => setShowConfirm(!showConfirm)}>
+                        <Icon name={showConfirm ? "EyeOff" : "Eye"} size={14} />
+                      </button>
+                    </div>
+                  </div>
 
-              <div className="nx-field">
-                <label>Email</label>
-                <div className="nx-input-wrap">
-                  <Icon name="Mail" size={15} className="nx-ico" />
-                  <input type="email" placeholder="Введите ваш email" />
-                </div>
-              </div>
+                  <div className="st-captcha-box">
+                    <div className="st-captcha-inner">
+                      <Icon name="ShieldCheck" size={28} />
+                      <span>Я не робот</span>
+                    </div>
+                  </div>
 
-              <div className="nx-field">
-                <label>Пароль</label>
-                <div className="nx-input-wrap">
-                  <Icon name="Lock" size={15} className="nx-ico" />
-                  <input
-                    type={showPass ? "text" : "password"}
-                    placeholder="Придумайте пароль"
-                  />
-                  <button type="button" className="nx-eye" onClick={() => setShowPass(!showPass)}>
-                    <Icon name={showPass ? "EyeOff" : "Eye"} size={15} />
+                  <label className="st-agree">
+                    <input type="checkbox" />
+                    <span>
+                      Я подтверждаю, что мне исполнилось 13 лет и я принимаю{" "}
+                      <a href="#" className="st-link">Соглашение подписчика Steam</a>{" "}
+                      и{" "}
+                      <a href="#" className="st-link">Политику конфиденциальности</a>.
+                    </span>
+                  </label>
+
+                  <button type="submit" className="st-btn-green">
+                    Создать аккаунт
                   </button>
-                </div>
+                </form>
               </div>
-
-              <div className="nx-field">
-                <label>Подтвердите пароль</label>
-                <div className="nx-input-wrap">
-                  <Icon name="ShieldCheck" size={15} className="nx-ico" />
-                  <input
-                    type={showConfirm ? "text" : "password"}
-                    placeholder="Повторите пароль"
-                  />
-                  <button type="button" className="nx-eye" onClick={() => setShowConfirm(!showConfirm)}>
-                    <Icon name={showConfirm ? "EyeOff" : "Eye"} size={15} />
-                  </button>
-                </div>
-              </div>
-
-              <label className="nx-check" style={{ marginBottom: "8px" }}>
-                <input type="checkbox" />
-                <span>
-                  Я согласен с{" "}
-                  <a href="#" className="nx-link">Условиями использования</a>{" "}
-                  и{" "}
-                  <a href="#" className="nx-link">Политикой конфиденциальности</a>
-                </span>
-              </label>
-
-              <button type="submit" className="nx-btn-primary">
-                Создать аккаунт
-              </button>
-
-              <p className="nx-switch">
-                Уже есть аккаунт?{" "}
-                <button type="button" onClick={() => setTab("login")} className="nx-link-btn">
-                  Войти
-                </button>
-              </p>
-            </form>
-          )}
+            )}
+          </div>
         </div>
       </main>
 
-      <footer className="nx-footer">
-        <p>© 2026 Steam. Все права защищены.</p>
-        <div className="nx-footer-links">
-          <a href="#">Конфиденциальность</a>
-          <a href="#">Правовая информация</a>
-          <a href="#">Контакты</a>
+      {/* Footer */}
+      <footer className="st-footer">
+        <div className="st-footer-inner">
+          <div className="st-footer-logo">
+            <svg width="100" height="22" viewBox="0 0 100 22" fill="none">
+              <text x="0" y="17" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="18" fill="#8ba3b5" letterSpacing="-0.5">STEAM</text>
+            </svg>
+          </div>
+          <div className="st-footer-links">
+            <a href="#">Главная страница</a>
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Правовая информация</a>
+            <a href="#">Соглашение</a>
+            <a href="#">Возрастные ограничения</a>
+            <a href="#">Поддержка</a>
+          </div>
+          <p className="st-footer-copy">
+            © 2025 Valve Corporation. Все права защищены. Все торговые марки являются собственностью соответствующих владельцев в США и других странах.
+          </p>
+          <div className="st-footer-langs">
+            <a href="#">Русский</a> | <a href="#">English</a>
+          </div>
         </div>
       </footer>
     </div>
