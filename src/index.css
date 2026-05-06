@@ -624,6 +624,24 @@ a:hover {
   line-height: 1.5;
 }
 
+/* ERROR */
+.newlogindialog_error {
+  background: rgba(180, 40, 40, 0.18);
+  border: 1px solid rgba(220, 60, 60, 0.5);
+  border-radius: 3px;
+  color: #ff6b6b;
+  font-size: 12px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+/* DISABLED BUTTON */
+.btn_blue_steamui:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* ═══════════════════════════════════════════════════
    FOOTER  (точно как в store.css)
    ═══════════════════════════════════════════════════ */
