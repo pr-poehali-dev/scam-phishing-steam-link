@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tailwind vars — не трогать */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 222 47% 8%;
+    --foreground: 210 40% 85%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -33,37 +34,7 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
 }
-
 @layer base {
   * {
     @apply border-border;
@@ -73,116 +44,161 @@
   }
 }
 
-/* ════════════════════════════════════════════════
-   STEAM — точные цвета из shared_global.css
-   ════════════════════════════════════════════════ */
-* {
+/* ═══════════════════════════════════════════════════
+   STEAM — шрифт Motiva Sans (родной шрифт Steam)
+   ═══════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: "Motiva Sans";
+  src: url("https://store.akamai.steamstatic.com/public/shared/fonts/MotivaSans-Regular.ttf?v=4.015")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Motiva Sans";
+  src: url("https://store.akamai.steamstatic.com/public/shared/fonts/MotivaSans-Bold.ttf?v=4.015")
+    format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Motiva Sans";
+  src: url("https://store.akamai.steamstatic.com/public/shared/fonts/MotivaSans-Light.ttf?v=4.015")
+    format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESET + BASE (как в store.css)
+   ═══════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+body,
+html {
+  font-family: "Motiva Sans", Arial, Helvetica, sans-serif;
   font-size: 12px;
   color: #c6d4df;
   background: #1b2838;
   min-height: 100vh;
 }
 
-.st-root {
+a {
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  color: #66c0f4;
+}
+
+/* ═══════════════════════════════════════════════════
+   ROOT WRAPPER
+   ═══════════════════════════════════════════════════ */
+.v6.game_bg {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: #1b2838;
 }
 
-/* ── GLOBAL HEADER ─────────────────────────────── */
+/* ═══════════════════════════════════════════════════
+   GLOBAL HEADER  (#171a21, высота 56px)
+   ═══════════════════════════════════════════════════ */
 #global_header {
-  background: #171a21;
-  padding: 0;
+  background-color: #171a21;
   position: relative;
-  z-index: 100;
-  min-height: 56px;
-  display: flex;
-  align-items: stretch;
+  z-index: 400;
+  border-bottom: 1px solid #000;
+  flex-shrink: 0;
 }
 
 #global_header .content {
   width: 940px;
   margin: 0 auto;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 0;
+  min-height: 56px;
 }
 
 #global_header .logo a {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  text-decoration: none;
+  display: block;
+  line-height: 0;
 }
 
 #global_header .logo img {
   height: 44px;
   width: auto;
-}
-
-.logo-fallback {
-  font-size: 26px;
-  font-weight: bold;
-  color: #fff;
-  letter-spacing: 2px;
-}
-
-.header_links {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.header_installsteam_btn .btn_medium {
-  background: linear-gradient(to bottom, #606060 5%, #3d3d3f 95%);
-  border-radius: 2px;
-  padding: 6px 16px;
-  color: #d2e885;
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-  transition: filter 0.15s;
-  text-decoration: none;
   display: block;
 }
 
-.header_installsteam_btn:hover .btn_medium {
-  filter: brightness(1.2);
+/* supernav (правая часть хедера) */
+.supernav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .global_action_link {
   color: #8ba3b5;
   font-size: 12px;
   font-weight: bold;
-  text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  padding: 6px 10px;
   transition: color 0.15s;
 }
-
 .global_action_link:hover {
   color: #c6d4df;
 }
 
-/* ── STORE NAV ─────────────────────────────────── */
+/* зелёная кнопка "Установить Steam" */
+.btn_green_white_innerfade {
+  display: inline-block;
+  padding: 1px;
+  background: linear-gradient(to right, #a4d007, #536904);
+  border-radius: 2px;
+}
+.btn_green_white_innerfade.btn_medium {
+  padding: 0;
+  background: none;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #a4d007 5%, #536904 95%);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+.btn_green_white_innerfade.btn_medium span {
+  display: block;
+  padding: 6px 16px;
+  color: #d2e885;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  font-family: inherit;
+}
+.btn_green_white_innerfade.btn_medium:hover {
+  filter: brightness(1.1);
+}
+
+/* ═══════════════════════════════════════════════════
+   STORE NAV  (синяя полоса под хедером)
+   ═══════════════════════════════════════════════════ */
 #store_nav_area {
-  background: linear-gradient(to bottom, #2a4d6f 0%, #1b3a57 100%);
-  border-bottom: 1px solid #000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   position: relative;
-  z-index: 50;
+  z-index: 300;
+  background: linear-gradient(135deg, #2a4d6f 0%, #1b3a57 100%);
+  border-bottom: 1px solid #000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
 }
 
 #store_nav_links {
@@ -193,120 +209,129 @@ body {
 #store_nav {
   display: flex;
   align-items: center;
+  gap: 0;
 }
 
 .store_nav_item a {
   display: block;
-  padding: 9px 16px;
+  padding: 8px 16px;
   color: #8ba3b5;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-decoration: none;
+  letter-spacing: 0.6px;
   transition:
     color 0.15s,
     background 0.15s;
 }
-
-.store_nav_item a:hover {
-  color: #c6d4df;
-  background: rgba(255, 255, 255, 0.05);
-}
-
+.store_nav_item a:hover,
 .store_nav_item a.active {
   color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* ── PAGE BG ───────────────────────────────────── */
-.st-page-bg {
+/* ═══════════════════════════════════════════════════
+   PAGE CONTENT AREA
+   ═══════════════════════════════════════════════════ */
+.responsive_page_content {
   flex: 1;
-  background: linear-gradient(180deg, #2a475e 0%, #1b2838 100%);
+  background: linear-gradient(180deg, #2a475e 0%, #1b2838 60%, #1b2838 100%);
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 40px 20px 60px;
+  flex-direction: column;
 }
 
-.st-page-content {
+.responsive_page_template_content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 20px 60px;
+}
+
+.page_content_ctn {
   width: 100%;
   max-width: 940px;
+}
+
+#login_ctn {
   display: flex;
   justify-content: center;
 }
 
-/* ── LOGIN DIALOG ──────────────────────────────── */
-.newlogindialog_background {
+#login_form_ctn {
   width: 100%;
   max-width: 450px;
 }
 
-.newlogindialog {
+/* ═══════════════════════════════════════════════════
+   LOGIN DIALOG  (.newlogindialog_modal)
+   ═══════════════════════════════════════════════════ */
+.newlogindialog_modal {
   background: #2a475e;
   border-radius: 3px;
+  overflow: hidden;
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.7),
-    0 0 20px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  overflow: hidden;
+    0 4px 24px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* TABS */
-.newlogindialog_tabs {
-  display: flex;
+.newlogindialog_modal_header {
   background: #1b3a52;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
+.newlogindialog_tabs_ctn {
+  display: flex;
+}
+
 .newlogindialog_tab {
   flex: 1;
-  padding: 12px 16px;
+  padding: 12px 18px;
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
   color: #7ba3bf;
+  font-family: "Motiva Sans", Arial, sans-serif;
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   cursor: pointer;
-  font-family: inherit;
   transition:
     color 0.15s,
     border-color 0.15s,
     background 0.15s;
-  margin-bottom: -1px;
 }
-
 .newlogindialog_tab:hover {
   color: #c6d4df;
   background: rgba(255, 255, 255, 0.04);
 }
-
 .newlogindialog_tab.active {
   color: #fff;
   border-bottom-color: #66c0f4;
-  background: rgba(102, 192, 244, 0.07);
+  background: rgba(102, 192, 244, 0.06);
 }
 
-/* CONTENT */
-.newlogindialog_content {
-  padding: 24px 28px 28px;
+/* MODAL BODY */
+.newlogindialog_modal_body {
+  padding: 24px 28px 30px;
 }
 
+/* header */
 .newlogindialog_header {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
-
-.newlogindialog_header_desc {
+.newlogindialog_header_h1 {
   font-size: 22px;
-  font-weight: normal;
+  font-weight: 300;
   color: #66c0f4;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Motiva Sans", Arial, sans-serif;
 }
 
-/* INPUT ROWS */
+/* INPUT ROW */
 .newlogindialog_inputrow {
   margin-bottom: 14px;
 }
@@ -317,35 +342,33 @@ body {
   color: #8f98a0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .newlogindialog_input {
+  display: block;
   width: 100%;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid #000;
   border-radius: 3px;
-  padding: 9px 11px;
+  padding: 9px 12px;
   color: #c6d4df;
   font-size: 13px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Motiva Sans", Arial, sans-serif;
   outline: none;
-  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.5);
   transition:
     border-color 0.15s,
     box-shadow 0.15s;
   -webkit-appearance: none;
   appearance: none;
-  display: block;
 }
-
 .newlogindialog_input:focus {
   border-color: #66c0f4;
   box-shadow:
-    inset 0 1px 5px rgba(0, 0, 0, 0.6),
-    0 0 0 2px rgba(102, 192, 244, 0.18);
+    inset 0 1px 5px rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(102, 192, 244, 0.2);
 }
-
 .newlogindialog_input::placeholder {
   color: #4e697d;
 }
@@ -356,32 +379,30 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238f98a0'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
+  background-color: rgba(0, 0, 0, 0.2);
 }
-
 .newlogindialog_select option {
   background: #1b3a52;
   color: #c6d4df;
 }
 
-.newlogindialog_hint {
+.newlogindialog_subtext {
   font-size: 11px;
   color: #67707b;
-  margin-top: 4px;
-  line-height: 1.4;
+  margin-top: 5px;
+  line-height: 1.45;
 }
 
-/* PASSWORD WRAP */
-.newlogindialog_passwrap {
+/* password field */
+.newlogindialog_pwfield {
   position: relative;
 }
-
-.newlogindialog_passwrap .newlogindialog_input {
-  padding-right: 36px;
+.newlogindialog_pwfield .newlogindialog_input {
+  padding-right: 38px;
 }
-
 .newlogindialog_eyebtn {
   position: absolute;
-  right: 9px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -393,126 +414,125 @@ body {
   padding: 3px;
   transition: color 0.15s;
 }
-
 .newlogindialog_eyebtn:hover {
   color: #8f98a0;
 }
 
-/* REMEMBER */
-.newlogindialog_remember {
-  margin-bottom: 14px;
+/* remember me */
+.newlogindialog_remember_ctn {
+  margin-bottom: 16px;
 }
-
-.newlogindialog_remember label {
+.newlogindialog_checkbox_label {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   cursor: pointer;
-  color: #c6d4df;
-  font-size: 12px;
   user-select: none;
 }
-
-.newlogindialog_remember input[type="checkbox"] {
+.newlogindialog_checkbox {
   width: 13px;
   height: 13px;
   accent-color: #66c0f4;
   cursor: pointer;
+  flex-shrink: 0;
+}
+.newlogindialog_checkbox_text {
+  font-size: 12px;
+  color: #c6d4df;
 }
 
-/* SUBMIT */
-.newlogindialog_submitrow {
+/* submit */
+.newlogindialog_submit_ctn {
   margin-bottom: 14px;
 }
 
-/* STEAM BLUE BUTTON */
+/* BLUE BUTTON */
 .btn_blue_steamui {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 10px 20px;
-  background: linear-gradient(to bottom, #4b8dbf 5%, #2e6290 95%);
+  padding: 0;
+  background: none;
   border: none;
-  border-radius: 3px;
   cursor: pointer;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
+}
+.btn_blue_steamui.btn_medium_wide {
+  background: linear-gradient(to bottom, #4b8dbf 5%, #2e6290 95%);
+  border-radius: 3px;
+  padding: 10px 20px;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.15),
     inset 0 -1px 0 rgba(0, 0, 0, 0.3),
-    0 2px 6px rgba(0, 0, 0, 0.4);
+    0 2px 8px rgba(0, 0, 0, 0.5);
   transition: filter 0.15s;
 }
-
-.btn_blue_steamui span {
+.btn_blue_steamui.btn_medium_wide span {
   color: #c6d4df;
   font-size: 13px;
   font-weight: bold;
-  font-family: inherit;
+  font-family: "Motiva Sans", Arial, sans-serif;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.3px;
 }
-
-.btn_blue_steamui:hover {
-  filter: brightness(1.15);
+.btn_blue_steamui.btn_medium_wide:hover {
+  filter: brightness(1.14);
 }
-.btn_blue_steamui:active {
-  filter: brightness(0.9);
+.btn_blue_steamui.btn_medium_wide:active {
+  filter: brightness(0.92);
   transform: translateY(1px);
 }
 
-/* HELP LINKS */
-.newlogindialog_helplinks {
+/* help links */
+.newlogindialog_help_ctn {
   display: flex;
   flex-direction: column;
   gap: 5px;
   margin-bottom: 14px;
 }
-
-.newlogindialog_link {
+.newlogindialog_text_link {
   color: #67c1f5;
   font-size: 12px;
   text-decoration: none;
   transition: color 0.15s;
 }
-
-.newlogindialog_link:hover {
+.newlogindialog_text_link:hover {
   color: #fff;
   text-decoration: underline;
 }
 
-/* DIVIDER */
-.newlogindialog_divider {
+/* OR divider */
+.newlogindialog_or_ctn {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
 }
-
-.newlogindialog_divider span:not(.newlogindialog_divider_text) {
+.newlogindialog_or_line {
   flex: 1;
   height: 1px;
   background: rgba(78, 105, 125, 0.5);
-  display: block;
 }
-
-.newlogindialog_divider_text {
+.newlogindialog_or_text {
   color: #4e697d;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  flex-shrink: 0;
 }
 
-/* QR BUTTON */
+/* QR button */
+.newlogindialog_qr_ctn {
+}
 .newlogindialog_qr_btn {
   width: 100%;
   padding: 9px 16px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.18);
   border: 1px solid rgba(78, 105, 125, 0.5);
   border-radius: 3px;
   color: #8f98a0;
   font-size: 12px;
-  font-family: inherit;
+  font-family: "Motiva Sans", Arial, sans-serif;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -523,7 +543,6 @@ body {
     color 0.15s,
     border-color 0.15s;
 }
-
 .newlogindialog_qr_btn:hover {
   background: rgba(255, 255, 255, 0.06);
   color: #c6d4df;
@@ -531,39 +550,39 @@ body {
 }
 
 /* CAPTCHA */
-.newlogindialog_captcha {
-  background: #f0f0f0;
+.newlogindialog_captcha_ctn {
+  margin-bottom: 14px;
+}
+.newlogindialog_captcha_widget {
+  background: #f9f9f9;
   border: 1px solid #d3d3d3;
   border-radius: 3px;
   padding: 12px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
 }
-
-.newlogindialog_captcha label {
+.newlogindialog_captcha_check {
   display: flex;
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  color: #3d3d3f;
-  font-size: 13px;
 }
-
-.newlogindialog_captcha input[type="checkbox"] {
+.newlogindialog_captcha_check input[type="checkbox"] {
   width: 20px;
   height: 20px;
   cursor: pointer;
 }
-
-.newlogindialog_captcha_badge {
+.newlogindialog_captcha_check span {
+  font-size: 13px;
+  color: #3d3d3f;
+}
+.newlogindialog_captcha_logo {
   display: flex;
   align-items: center;
   gap: 6px;
 }
-
-.captcha_icon {
+.captcha_rc_icon {
   width: 36px;
   height: 36px;
   background: #4a90d9;
@@ -575,89 +594,83 @@ body {
   font-weight: bold;
   font-size: 11px;
 }
-
-.captcha_label {
+.captcha_rc_text {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-
-.captcha_label span:first-child {
+.captcha_rc_text span:first-child {
   font-size: 10px;
   font-weight: bold;
   color: #555;
 }
-
-.captcha_label span:last-child {
+.captcha_rc_text span:last-child {
   font-size: 9px;
   color: #aaa;
 }
 
 /* AGREE */
-.newlogindialog_agree {
+.newlogindialog_agree_label {
   display: flex;
   align-items: flex-start;
   gap: 8px;
   cursor: pointer;
-  color: #8f98a0;
-  font-size: 11.5px;
-  line-height: 1.5;
   user-select: none;
   margin-bottom: 16px;
 }
-
-.newlogindialog_agree input[type="checkbox"] {
-  width: 13px;
-  height: 13px;
-  accent-color: #66c0f4;
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-top: 2px;
+.newlogindialog_agree_text {
+  font-size: 11.5px;
+  color: #8f98a0;
+  line-height: 1.5;
 }
 
-/* ── FOOTER ────────────────────────────────────── */
-#footer {
+/* ═══════════════════════════════════════════════════
+   FOOTER  (точно как в store.css)
+   ═══════════════════════════════════════════════════ */
+#footer.v6 {
   background: #171a21;
   border-top: 1px solid #000;
   padding: 20px 0 40px;
-  margin-top: auto;
+  flex-shrink: 0;
 }
 
-#footer .footer_content {
+#footer .footer_content.v6 {
   width: 940px;
   margin: 0 auto;
+  padding-top: 12px;
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  padding-top: 10px;
+  gap: 14px;
 }
 
 #footer_logo img {
   height: 25px;
   width: auto;
-  opacity: 0.6;
+  opacity: 0.55;
+  display: block;
+  margin-top: 2px;
 }
 
 #footer_text {
   flex: 1;
 }
 
-.footer_links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
+#footer_links {
   margin-bottom: 8px;
+  line-height: 2;
 }
-
-.footer_links a {
+#footer_links a {
   color: #4e697d;
   font-size: 11px;
-  text-decoration: none;
   transition: color 0.15s;
 }
-
-.footer_links a:hover {
+#footer_links a:hover {
   color: #8f98a0;
+}
+.footer_sep {
+  color: #4e697d;
+  margin: 0 6px;
+  font-size: 11px;
 }
 
 .valve_links_footer {
@@ -666,11 +679,13 @@ body {
   line-height: 1.5;
 }
 
-/* ── RESPONSIVE ────────────────────────────────── */
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════ */
 @media (max-width: 980px) {
   #global_header .content,
   #store_nav_links,
-  #footer .footer_content {
+  #footer .footer_content.v6 {
     width: 100%;
     padding-left: 16px;
     padding-right: 16px;
@@ -680,11 +695,13 @@ body {
 @media (max-width: 600px) {
   #store_nav {
     overflow-x: auto;
+    white-space: nowrap;
   }
-  .newlogindialog_content {
-    padding: 18px 16px 22px;
+  .newlogindialog_modal_body {
+    padding: 18px 16px 24px;
   }
-  .header_links {
-    gap: 8px;
+  .newlogindialog_tab {
+    padding: 10px 10px;
+    font-size: 11px;
   }
 }
