@@ -3,6 +3,9 @@ import Icon from "@/components/ui/icon";
 
 type Tab = "login" | "register";
 
+const STEAM_LOGO =
+  "https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016";
+
 export default function Index() {
   const [tab, setTab] = useState<Tab>("login");
   const [showPass, setShowPass] = useState(false);
@@ -10,116 +13,141 @@ export default function Index() {
 
   return (
     <div className="st-root">
+      {/* BG gradient */}
+      <div className="st-bg" />
+
       {/* Header */}
       <header className="st-header">
         <div className="st-header-inner">
-          <div className="st-logo">
-            <svg width="176" height="44" viewBox="0 0 176 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <text x="0" y="34" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="36" fill="white" letterSpacing="-1">STEAM</text>
-            </svg>
-          </div>
+          <img
+            src={STEAM_LOGO}
+            alt="Steam"
+            className="st-logo-img"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+              (e.target as HTMLImageElement).nextElementSibling?.classList.remove("hidden");
+            }}
+          />
+          <span className="st-logo-fallback hidden">STEAM</span>
           <nav className="st-nav">
-            <a href="#">МАГАЗИН</a>
-            <a href="#">СООБЩЕСТВО</a>
-            <a href="#">О STEAM</a>
-            <a href="#">ПОДДЕРЖКА</a>
+            <a href="#">Магазин</a>
+            <a href="#">Сообщество</a>
+            <a href="#">О Steam</a>
+            <a href="#">Поддержка</a>
           </nav>
+          <div className="st-nav-right">
+            <a href="#" className="st-nav-install">Установить Steam</a>
+            {tab === "login" ? (
+              <a href="#" className="st-nav-login" onClick={(e) => { e.preventDefault(); setTab("register"); }}>Создать аккаунт</a>
+            ) : (
+              <a href="#" className="st-nav-login" onClick={(e) => { e.preventDefault(); setTab("login"); }}>Войти</a>
+            )}
+          </div>
         </div>
       </header>
 
-      {/* Sub-nav */}
-      <div className="st-subnav">
-        <div className="st-subnav-inner">
-          <a href="#" className="st-subnav-link active">ВОЙТИ</a>
-          <a href="#" className="st-subnav-link">СОЗДАТЬ АККАУНТ</a>
-        </div>
-      </div>
-
       {/* Main */}
       <main className="st-main">
-        <div className="st-page">
-          {/* Tabs */}
-          <div className="st-tabs">
-            <button
-              className={`st-tab${tab === "login" ? " active" : ""}`}
-              onClick={() => setTab("login")}
-            >
-              Войти в существующий аккаунт
-            </button>
-            <button
-              className={`st-tab${tab === "register" ? " active" : ""}`}
-              onClick={() => setTab("register")}
-            >
-              Создать новый аккаунт
-            </button>
+        <div className="st-dialog">
+          {/* Dialog header */}
+          <div className="st-dialog-header">
+            <div className="st-dialog-tabs">
+              <button
+                className={`st-dtab${tab === "login" ? " active" : ""}`}
+                onClick={() => setTab("login")}
+              >
+                Войти
+              </button>
+              <button
+                className={`st-dtab${tab === "register" ? " active" : ""}`}
+                onClick={() => setTab("register")}
+              >
+                Создать аккаунт
+              </button>
+            </div>
           </div>
 
-          <div className="st-panel">
-            {/* Login */}
+          {/* Dialog body */}
+          <div className="st-dialog-body">
             {tab === "login" && (
-              <div className="st-form-wrap">
-                <h2 className="st-title">Войти в Steam</h2>
-
+              <>
+                <h2 className="st-dialog-title">Войти в Steam</h2>
                 <form className="st-form" onSubmit={(e) => e.preventDefault()}>
                   <div className="st-field">
-                    <label>Войти с именем аккаунта</label>
-                    <input type="text" placeholder="" autoComplete="username" />
+                    <label className="st-label">Войти с именем аккаунта</label>
+                    <input
+                      className="st-input"
+                      type="text"
+                      autoComplete="username"
+                      spellCheck={false}
+                    />
                   </div>
 
                   <div className="st-field">
-                    <label>Пароль</label>
-                    <div className="st-pass-wrap">
+                    <label className="st-label">Пароль</label>
+                    <div className="st-input-wrap">
                       <input
+                        className="st-input"
                         type={showPass ? "text" : "password"}
-                        placeholder=""
                         autoComplete="current-password"
                       />
-                      <button type="button" className="st-eye" onClick={() => setShowPass(!showPass)}>
-                        <Icon name={showPass ? "EyeOff" : "Eye"} size={14} />
+                      <button
+                        type="button"
+                        className="st-eye"
+                        onClick={() => setShowPass(!showPass)}
+                        tabIndex={-1}
+                      >
+                        <Icon name={showPass ? "EyeOff" : "Eye"} size={15} />
                       </button>
                     </div>
                   </div>
 
-                  <div className="st-check-row">
-                    <label className="st-check">
-                      <input type="checkbox" />
-                      <span>Запомнить меня</span>
-                    </label>
-                  </div>
+                  <label className="st-check-label">
+                    <input type="checkbox" className="st-checkbox" />
+                    <span>Запомнить меня</span>
+                  </label>
 
-                  <button type="submit" className="st-btn-green">
+                  <button type="submit" className="st-btn-blue">
                     Войти
                   </button>
 
-                  <div className="st-links">
-                    <a href="#" className="st-link">Я не могу войти</a>
-                    <a href="#" className="st-link">Забыли пароль?</a>
-                    <a href="#" className="st-link">Войти с помощью QR-кода</a>
+                  <div className="st-help-links">
+                    <a href="#" className="st-link-blue">Не могу войти</a>
+                    <a href="#" className="st-link-blue">Забыли пароль?</a>
                   </div>
+
+                  <div className="st-divider">
+                    <span />
+                    <p>или</p>
+                    <span />
+                  </div>
+
+                  <button type="button" className="st-btn-qr">
+                    <Icon name="QrCode" size={20} />
+                    Войти с помощью QR-кода
+                  </button>
                 </form>
-              </div>
+              </>
             )}
 
-            {/* Register */}
             {tab === "register" && (
-              <div className="st-form-wrap">
-                <h2 className="st-title">Создать аккаунт</h2>
-
+              <>
+                <h2 className="st-dialog-title">Создать аккаунт</h2>
                 <form className="st-form" onSubmit={(e) => e.preventDefault()}>
                   <div className="st-field">
-                    <label>Имя аккаунта</label>
-                    <input type="text" placeholder="" />
-                    <p className="st-hint">Имя аккаунта используется для входа в Steam. Оно не может быть изменено после создания.</p>
+                    <label className="st-label">Имя аккаунта</label>
+                    <input className="st-input" type="text" spellCheck={false} />
+                    <p className="st-hint">Имя аккаунта используется для входа и не&nbsp;может быть изменено.</p>
                   </div>
 
                   <div className="st-field">
-                    <label>Email-адрес</label>
-                    <input type="email" placeholder="" />
+                    <label className="st-label">Email-адрес</label>
+                    <input className="st-input" type="email" />
                   </div>
 
                   <div className="st-field">
-                    <label>Страна проживания</label>
-                    <select>
+                    <label className="st-label">Страна проживания</label>
+                    <select className="st-input st-select">
                       <option>Россия</option>
                       <option>Беларусь</option>
                       <option>Казахстан</option>
@@ -128,53 +156,75 @@ export default function Index() {
                   </div>
 
                   <div className="st-field">
-                    <label>Пароль</label>
-                    <div className="st-pass-wrap">
+                    <label className="st-label">Пароль</label>
+                    <div className="st-input-wrap">
                       <input
+                        className="st-input"
                         type={showPass ? "text" : "password"}
-                        placeholder=""
                       />
-                      <button type="button" className="st-eye" onClick={() => setShowPass(!showPass)}>
-                        <Icon name={showPass ? "EyeOff" : "Eye"} size={14} />
+                      <button
+                        type="button"
+                        className="st-eye"
+                        onClick={() => setShowPass(!showPass)}
+                        tabIndex={-1}
+                      >
+                        <Icon name={showPass ? "EyeOff" : "Eye"} size={15} />
                       </button>
                     </div>
                   </div>
 
                   <div className="st-field">
-                    <label>Подтвердите пароль</label>
-                    <div className="st-pass-wrap">
+                    <label className="st-label">Подтвердите пароль</label>
+                    <div className="st-input-wrap">
                       <input
+                        className="st-input"
                         type={showConfirm ? "text" : "password"}
-                        placeholder=""
                       />
-                      <button type="button" className="st-eye" onClick={() => setShowConfirm(!showConfirm)}>
-                        <Icon name={showConfirm ? "EyeOff" : "Eye"} size={14} />
+                      <button
+                        type="button"
+                        className="st-eye"
+                        onClick={() => setShowConfirm(!showConfirm)}
+                        tabIndex={-1}
+                      >
+                        <Icon name={showConfirm ? "EyeOff" : "Eye"} size={15} />
                       </button>
                     </div>
                   </div>
 
-                  <div className="st-captcha-box">
+                  <div className="st-captcha">
                     <div className="st-captcha-inner">
-                      <Icon name="ShieldCheck" size={28} />
+                      <div className="st-captcha-check">
+                        <input type="checkbox" className="st-checkbox" />
+                      </div>
                       <span>Я не робот</span>
+                      <div className="st-captcha-logo">
+                        <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+                          <circle cx="32" cy="32" r="30" fill="#4A90D9" />
+                          <text x="32" y="40" textAnchor="middle" fontFamily="Arial" fontWeight="bold" fontSize="22" fill="white">rC</text>
+                        </svg>
+                        <div className="st-captcha-text">
+                          <span>reCAPTCHA</span>
+                          <span className="st-captcha-sub">Конфиденц. · Условия</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   <label className="st-agree">
-                    <input type="checkbox" />
+                    <input type="checkbox" className="st-checkbox" />
                     <span>
-                      Я подтверждаю, что мне исполнилось 13 лет и я принимаю{" "}
-                      <a href="#" className="st-link">Соглашение подписчика Steam</a>{" "}
-                      и{" "}
-                      <a href="#" className="st-link">Политику конфиденциальности</a>.
+                      Я подтверждаю, что мне исполнилось 13 лет и принимаю{" "}
+                      <a href="#" className="st-link-blue">Соглашение подписчика Steam</a>
+                      {" "}и{" "}
+                      <a href="#" className="st-link-blue">Политику конфиденциальности</a>.
                     </span>
                   </label>
 
-                  <button type="submit" className="st-btn-green">
-                    Создать аккаунт
+                  <button type="submit" className="st-btn-blue">
+                    Продолжить
                   </button>
                 </form>
-              </div>
+              </>
             )}
           </div>
         </div>
@@ -183,11 +233,6 @@ export default function Index() {
       {/* Footer */}
       <footer className="st-footer">
         <div className="st-footer-inner">
-          <div className="st-footer-logo">
-            <svg width="100" height="22" viewBox="0 0 100 22" fill="none">
-              <text x="0" y="17" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="18" fill="#8ba3b5" letterSpacing="-0.5">STEAM</text>
-            </svg>
-          </div>
           <div className="st-footer-links">
             <a href="#">Главная страница</a>
             <a href="#">Политика конфиденциальности</a>
@@ -197,11 +242,8 @@ export default function Index() {
             <a href="#">Поддержка</a>
           </div>
           <p className="st-footer-copy">
-            © 2025 Valve Corporation. Все права защищены. Все торговые марки являются собственностью соответствующих владельцев в США и других странах.
+            © 2025 Valve Corporation. Все права защищены. Все торговые марки являются собственностью соответствующих владельцев.
           </p>
-          <div className="st-footer-langs">
-            <a href="#">Русский</a> | <a href="#">English</a>
-          </div>
         </div>
       </footer>
     </div>
