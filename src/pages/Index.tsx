@@ -21,7 +21,7 @@ export default function Index() {
       <header className="nx-header">
         <div className="nx-logo">
           <Icon name="Gamepad2" size={26} />
-          <span>NEXUS</span>
+          <span>Steam</span>
         </div>
         <nav className="nx-nav">
           <a href="#">Магазин</a>
@@ -183,7 +183,7 @@ export default function Index() {
       </main>
 
       <footer className="nx-footer">
-        <p>© 2026 Nexus Gaming. Все права защищены.</p>
+        <p>© 2026 Steam. Все права защищены.</p>
         <div className="nx-footer-links">
           <a href="#">Конфиденциальность</a>
           <a href="#">Правовая информация</a>
